@@ -1,0 +1,93 @@
+<!--NEW TASK MODAL-->
+<div class="new-task-modal " [ngClass]="theme">
+  <form
+    #taskForm="ngForm"
+    (ngSubmit)="onSubmit(taskForm.value)"
+    class="new-task-modal__content white-or-dark-grey-bg"
+  >
+    <div class="title-container">
+      <span class="title black-OR-white-txt">{{ textTitle }}</span>
+      <span class="btn-close-modal" (click)="onCloseModal()">&times;</span>
+    </div>
+    <div class="input-group">
+      <label for="name">Title</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        [(ngModel)]="taskTitle"
+        required
+        placeholder="e.g. Take coffee break"
+      />
+    </div>
+    <div class="input-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        cols="30"
+        rows="5"
+        name="description"
+        [(ngModel)]="description"
+        [placeholder]="
+          isEdition
+            ? 'this task have no description..'
+            : 'e.g. It’s always good to take a break..'
+        "
+      ></textarea>
+    </div>
+    <ul class="subtask-group">
+      <li class="subtask-group__item">
+        <label>Subtasks</label>
+      </li>
+      <li
+        class="subtask-group__item"
+        *ngFor="let sub of subtasks; let i = index"
+      >
+        <input
+          type="text"
+          name="subTask{{ i }}"
+          [(ngModel)]="sub.name"
+          placeholder="e.g. Make coffee"
+          required
+          [value]="sub.name | titlecase"
+        />
+        <span class="delete-subTask" (click)="deleteSubtask(sub.id)"
+          >&times;</span
+        >
+      </li>
+      <li class="subtask-group__item">
+        <span
+          class="btn-add-subTask white-or-line-light-grey-bg"
+          (click)="addSubtask()"
+          >+ Add New Subtask</span
+        >
+      </li>
+    </ul>
+    <div class="input-group">
+      <label for="status">Status</label>
+      <select
+        class="black-OR-white-txt"
+        name="status"
+        id="status"
+        [(ngModel)]="selectedColumn"
+        required
+      >
+        <option
+          class="white-or-very-dark-grey-bg"
+          *ngFor="let col of columns"
+          [value]="col.name"
+          [selected]="selectedColumn"
+          >{{ col.name | titlecase }}</option
+        >
+      </select>
+    </div>
+    <button
+      type="submit"
+      class="btn-create-task"
+      [disabled]="!taskForm.valid"
+      [ngClass]="{ 'disabled-btn': !taskForm.valid }"
+    >
+      {{ textBtn }}
+    </button>
+  </form>
+</div>

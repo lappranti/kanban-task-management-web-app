@@ -1,0 +1,242 @@
+//######### PX TO REM ###########
+
+@function toRem($val) {
+  @return calc($val / 16) * 1rem;
+}
+
+//############# WIDHT
+
+$widht-tablette: toRem(768);
+
+//########## COLORS #############
+
+$black: #000112;
+$very-dark-grey: #20212c;
+$dark-grey: #2b2c37;
+$line-dark: #3e3f4e;
+$medium-grey: #828fa3;
+$line-light: #e4ebfa;
+$line-grey: #f4f7fd;
+$white: #ffffff;
+$main-purple: #635fc7;
+$main-purple-hover: #a8a4ff;
+$red: #ea5555;
+$red-hover: #ff9898;
+
+//########### TYPOGRAPHY ###########
+
+@mixin typo($type) {
+  @if ($type== "h-xl") {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+  } @else if($type== "h-l") {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 23px;
+  } @else if($type== "h-m") {
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 19px;
+  } @else if($type== "h-s") {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: 2.4px;
+  } @else if($type== "b-l") {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 23px;
+  } @else if($type== "b-m") {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
+//###########" BOUTONS  #########
+
+@mixin btn($type) {
+  border: none;
+  cursor: pointer;
+  @if ($type== "p-l") {
+    background: $main-purple;
+    color: $white;
+    border-radius: 24px;
+
+    width: toRem(255);
+    height: toRem(48);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include typo("h-m");
+  } @else if ($type== "p-s") {
+    background: $main-purple;
+    color: $white;
+    border-radius: 20px;
+
+    width: toRem(255);
+    height: toRem(40);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 23px;
+  } @else if ($type== "s") {
+    background: rgba(99, 95, 199, 0.1);
+    color: $main-purple;
+    border-radius: 20px;
+
+    border-radius: 24px;
+
+    width: toRem(255);
+    height: toRem(40);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 23px;
+  } @else if ($type== "d") {
+    background: $red;
+    color: $white;
+    border-radius: 24px;
+
+    width: toRem(255);
+    height: toRem(48);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 23px;
+  }
+}
+
+@mixin theme() {
+  &.dark {
+    .black-OR-white-txt {
+      color: $white;
+    }
+
+    .halfBlack-OR-halfWhite {
+      color: #ffffff50;
+    }
+
+    .line-light-OR-white-bg {
+      &:hover {
+        color: $main-purple;
+        background-color: $white;
+      }
+    }
+
+    .very-dark-bg-OR-ligh-bg {
+      background-color: $very-dark-grey;
+    }
+
+    .line-light-OR-line-dark-border {
+      border-color: $line-dark;
+    }
+
+    .white-or-dark-grey-bg {
+      background-color: $dark-grey;
+    }
+
+    .white-or-very-dark-grey-bg {
+      background-color: $very-dark-grey;
+    }
+
+    .white-or-line-light-grey-bg {
+      background-color: $white;
+    }
+    .medium-grey-or-white {
+      color: $white;
+    }
+    input {
+      color: $white;
+
+      &::placeholder {
+        color: #ffffff25;
+      }
+    }
+
+    .white-or-main-purple-10 {
+      background-color: $white;
+    }
+
+    .bg-linear-gradient {
+      background: linear-gradient(
+        180deg,
+        rgba(43, 44, 55, 0.25) 0%,
+        rgba(43, 44, 55, 0.125) 100%
+      );
+    }
+  }
+  &.light {
+    .black-OR-white-txt {
+      color: $black;
+    }
+    .halfBlack-OR-halfWhite {
+      color: #00000050;
+    }
+
+    .line-light-OR-white-bg {
+      &:hover {
+        color: $main-purple;
+        background-color: $line-light;
+      }
+    }
+
+    .very-dark-bg-OR-ligh-bg {
+      background-color: $line-grey;
+    }
+
+    .line-light-OR-line-dark-border {
+      border-color: $line-light;
+    }
+
+    .white-or-dark-grey-bg {
+      background-color: $white;
+    }
+
+    .white-or-very-dark-grey-bg {
+      background-color: $white;
+    }
+
+    .white-or-line-light-grey-bg {
+      background-color: $line-grey;
+    }
+
+    .medium-grey-or-white {
+      color: $medium-grey;
+    }
+
+    input {
+      color: $black;
+
+      &::placeholder {
+        color: #00000025;
+      }
+    }
+    .white-or-main-purple-10 {
+      background: rgba(99, 95, 199, 0.1);
+    }
+
+    .bg-linear-gradient {
+      background: linear-gradient(
+        180deg,
+        #e9effa 0%,
+        rgba(233, 239, 250, 0.5) 100%
+      );
+    }
+  }
+}

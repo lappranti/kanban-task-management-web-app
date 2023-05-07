@@ -1,0 +1,13 @@
+<div class="modalDeleteBoard" [ngClass]="theme">
+  <div class="modalDeleteBoard__content  white-or-dark-grey-bg">
+    <span class="title"> {{ thing.name }}?</span>
+    <span class="text"
+      >Are you sure you want to delete the ‘Build settings UI’ task and its
+      subtasks? This action cannot be reversed.</span
+    >
+    <div class="actions">
+      <button class="delete" (click)="onClick(true)">Delete</button>
+      <button class="cancel" (click)="onClick(false)">Cancel</button>
+    </div>
+  </div>
+</div>

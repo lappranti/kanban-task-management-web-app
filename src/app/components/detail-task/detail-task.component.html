@@ -1,0 +1,57 @@
+<div class="container" [ngClass]="theme">
+  <div class="content white-or-dark-grey-bg">
+    <div class="top">
+      <span class="title black-OR-white-txt">{{ task.name }}</span>
+      <span class="options-group "
+        ><i class="bi bi-three-dots-vertical" (click)="toggleOptionMenu()"></i>
+        <ul class="options white-or-very-dark-grey-bg" *ngIf="showOptionMenu">
+          <li class="options__item" (click)="editeTask()">Edit Task</li>
+          <li class="options__item" (click)="deleteTask()">
+            Delete Task
+          </li>
+        </ul></span
+      >
+    </div>
+    <span class="description" *ngIf="task.description">
+      {{ task.description }}
+    </span>
+    <ul class="subtasks">
+      <span>{{ subTaskStatus() }}</span>
+      <li
+        class="subtask very-dark-bg-OR-ligh-bg"
+        *ngFor="let sub of task.subtasks"
+        (click)="changeStatusSubtask(sub)"
+        [ngClass]="!sub.isDone ? 'doneItem' : ''"
+      >
+        <i
+          class="bi "
+          [ngClass]="sub.isDone ? 'bi-check-square-fill' : 'bi-square-fill'"
+        ></i
+        ><span
+          [ngClass]="
+            sub.isDone ? 'done halfBlack-OR-halfWhite' : 'black-OR-white-txt '
+          "
+          >{{ sub.name }}</span
+        >
+      </li>
+    </ul>
+    <div class="currentStatus">
+      <label class="medium-grey-or-white">Current Status</label>
+      <select
+        name="status"
+        id="status"
+        [(ngModel)]="currentStatus"
+        required
+        class="white-or-dark-grey-bg black-OR-white-txt"
+      >
+        <option
+          class="white-or-very-dark-grey-bg"
+          *ngFor="let col of columns"
+          [value]="col.name"
+          [selected]="col.name == currentStatus"
+          >{{ col.name | titlecase }}</option
+        >
+      </select>
+    </div>
+  </div>
+</div>

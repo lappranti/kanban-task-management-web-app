@@ -1,0 +1,161 @@
+@import "../../shared/style/variables";
+
+.container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00000050;
+
+  @include theme();
+}
+
+.content {
+  width: calc(280px + 8vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  padding: 32px;
+  border-radius: 6px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  @include typo("h-l");
+}
+
+.options-group {
+  position: relative;
+
+  i {
+    color: $medium-grey;
+    cursor: pointer;
+  }
+
+  .options {
+    position: absolute;
+    z-index: 15;
+    top: 120%;
+    right: -24px;
+
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    padding: 16px;
+    box-shadow: 0px 10px 20px rgba(54, 78, 126, 0.25);
+    border-radius: 8px;
+
+    &__item {
+      @include typo("b-l");
+      color: $medium-grey;
+      cursor: pointer;
+      &:nth-of-type(2) {
+        color: $red;
+      }
+    }
+  }
+}
+
+.description {
+  color: $medium-grey;
+  @include typo("b-l");
+}
+
+.subtasks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  > span {
+    margin-bottom: 8px;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    color: $medium-grey;
+  }
+
+  .subtask {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-radius: 4px;
+
+    max-width: 40vh;
+    overflow-y: auto;
+
+    &.doneItem {
+      background-color: #635fc725;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    i {
+      color: $main-purple;
+      &.bi-square-fill {
+        color: $white;
+      }
+    }
+
+    span {
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 15px;
+
+      &.done {
+        text-decoration: line-through;
+      }
+    }
+  }
+}
+
+.currentStatus {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  select {
+    padding: 8px 16px;
+    @include typo("b-l");
+
+    height: 40px;
+    width: 100%;
+    padding: 0 16px;
+    border-radius: 4px;
+    border: 1px solid rgba(130, 143, 163, 0.25);
+    outline: none;
+    background-color: transparent;
+
+    &:hover,
+    &:focus {
+      border-color: $main-purple;
+    }
+  }
+}

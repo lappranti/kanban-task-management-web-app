@@ -1,0 +1,126 @@
+<div class="container" [ngClass]="theme">
+  <!--SIDEBAR-->
+  <div
+    class="sidebar line-light-OR-line-dark-border white-or-dark-grey-bg"
+    id="sidebar-container"
+    [ngClass]="sideBar ? '' : 'hidden'"
+  >
+    <div class="logo">
+      <img
+        [src]="
+          theme == 'dark' ? '/assets/logo-light.svg' : '/assets/logo-dark.svg'
+        "
+        alt="logo"
+      />
+    </div>
+    <ul class="boards">
+      <li class="boards__item" *ngIf="data">ALL BOARDS ({{ data.length }})</li>
+      <li
+        class="boards__item boards__item--link"
+        *ngFor="let board of data; let i = index"
+        (click)="selectBoard(board)"
+        [id]="board.id"
+        [ngClass]="board.isActive ? 'active' : ''"
+      >
+        <i class="bi bi-layout-three-columns"></i><span>{{ board.name }}</span>
+      </li>
+      <li class="boards__item" (click)="toggleHandleModalFormBoard('add')">
+        <i class="bi bi-layout-three-columns"></i
+        ><span>+ Create New Board</span>
+      </li>
+      <li class="boards__item" *ngIf="data.length == 0" (click)="peuplateApp()">
+        <i class="bi bi-layout-three-columns"></i><span>Fill again</span>
+      </li>
+    </ul>
+    <div class="toggle-sidebar-container">
+      <span class="toggle-theme-container very-dark-bg-OR-ligh-bg">
+        <i class="bi bi-sun-fill" (click)="toggleTheme('left')"></i>
+        <span class="btn-container" (click)="toggleTheme()">
+          <span
+            class="btn"
+            [style]="theme == 'dark' ? 'right:3px' : 'left:3px'"
+          ></span>
+        </span>
+        <i class="bi bi-moon-stars-fill" (click)="toggleTheme('right')"></i>
+      </span>
+      <span
+        class="toggle-sidebar line-light-OR-white-bg "
+        (click)="toggleSideBar()"
+      >
+        <i class="bi bi-eye-slash"></i>
+        <span>Hide Sidebar</span></span
+      >
+    </div>
+  </div>
+  <!--SECTION-->
+  <div class="section">
+    <div
+      class="header line-light-OR-line-dark-border white-or-dark-grey-bg"
+      [ngClass]="sideBar ? '' : 'hidden'"
+    >
+      <div
+        class="logo-container line-light-OR-line-dark-border"
+        *ngIf="!sideBar"
+      >
+        <img
+          class="img-desktop"
+          [src]="
+            theme == 'dark' ? '/assets/logo-light.svg' : '/assets/logo-dark.svg'
+          "
+          alt="logo"
+        />
+        <img class="img-mobile" src="/assets/mobileLogo.svg" alt="" />
+      </div>
+      <h1 class="black-OR-white-txt" *ngIf="currentBoard">
+        {{ currentBoard.name }}
+      </h1>
+      <span class="btn-group-addTask-editBoard">
+        <span class="btn-add-task" (click)="handleToggleTaskForm()"
+          ><i class="bi bi-plus-lg"></i
+          ><span class="text">Add New Task</span></span
+        >
+        <i
+          class="bi bi-three-dots-vertical black-OR-white-txt"
+          (click)="toggleMenuEditBoard()"
+        ></i>
+        <ul
+          class="option-edit-board white-or-very-dark-grey-bg"
+          *ngIf="showMenuEditeBoard"
+        >
+          <li
+            class="option-edit-board__item"
+            (click)="toggleHandleModalFormBoard('edite')"
+          >
+            Edit Board
+          </li>
+          <li class="option-edit-board__item" (click)="handleDeleteBoard()">
+            Delete Board
+          </li>
+        </ul>
+      </span>
+    </div>
+    <div class="main-content very-dark-bg-OR-ligh-bg">
+      <span class="btn-show-sidebar" *ngIf="!sideBar" (click)="toggleSideBar()">
+        <i class="bi bi-eye-fill"></i>
+      </span>
+      <app-board [board]="currentBoard"></app-board>
+    </div>
+  </div>
+</div>
+<app-board-form
+  [editingBoard]="actionTypeFormBoard === 'edite' ? currentBoard : undefined"
+  *ngIf="showModalFormBoard"
+  (hiddeModal)="toggleHandleModalFormBoard()"
+></app-board-form>
+
+<app-delete-thing
+  *ngIf="showModalDeliteBoard"
+  [thing]="currentBoard"
+  (isDelteActive)="handleDeleteBoard($event)"
+></app-delete-thing>
+
+<app-task-form
+  [currentBoard]="currentBoard"
+  *ngIf="showModalFormTask"
+  (hiddeModal)="handleToggleTaskForm()"
+></app-task-form>

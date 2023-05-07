@@ -1,0 +1,61 @@
+<div class="container" [ngClass]="theme" *ngIf="board">
+  <ul class="columns" *ngIf="board.columns.length > 0">
+    <li class="column" *ngFor="let column of board.columns; let i = index">
+      <span class="column__title">
+        <span [style.background-color]="generateColor(i)"></span>
+        <span> {{ column.name | uppercase }} ({{ column.tasks.length }})</span>
+      </span>
+      <ul class="tasks">
+        <li
+          class="task white-or-dark-grey-bg"
+          *ngFor="let task of column.tasks"
+          (click)="selectedTask(task)"
+        >
+          <span class="task__title black-OR-white-txt">
+            {{ task.name }}
+          </span>
+          <span class="task__status-subtasks">
+            {{ generateSubtaskStatus(task) }}
+          </span>
+        </li>
+      </ul>
+    </li>
+    <li
+      class="column column--add-new bg-linear-gradient"
+      (click)="toggleHandleModalAddColumn()"
+    >
+      <span class="btn-add-column">+ New Column</span>
+    </li>
+  </ul>
+  <div class="board-vide" *ngIf="board.columns.length == 0">
+    <span>This board is empty. Create a new column to get started.</span>
+    <span class="btn-add-column" (click)="toggleHandleModalAddColumn()"
+      >+ Add New Column</span
+    >
+  </div>
+</div>
+<app-column-form
+  [currentBoard]="board"
+  *ngIf="showModalAddColumn"
+  (hiddeModal)="toggleHandleModalAddColumn()"
+></app-column-form>
+
+<app-detail-task
+  [data]="{ board: board, task: currentSelectedTask }"
+  *ngIf="showTaskDetail && currentSelectedTask"
+  (toggleModal)="selectedTask()"
+  (deleteConfirm)="deleteSelectedTask()"
+  (editeConfirm)="editeSelectedTask()"
+></app-detail-task>
+
+<app-delete-thing
+  [thing]="currentSelectedTask"
+  *ngIf="showModaleConfirmationDelete"
+  (isDelteActive)="deleteSelectedTask($event)"
+></app-delete-thing>
+
+<app-task-form
+  [editingData]="{ board: board, task: currentSelectedTask! }"
+  *ngIf="showModaleEditeTask"
+  (hiddeModal)="closeEditeTaskModal()"
+></app-task-form>

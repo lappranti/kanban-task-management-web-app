@@ -1,0 +1,124 @@
+@import "../../shared/style/variables";
+
+.container {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  display: flex;
+  padding: 24px;
+
+  @include theme();
+  * {
+    transition: all 0.4s ease-in-out;
+  }
+}
+
+.columns {
+  display: flex;
+  gap: 24px;
+}
+
+.column {
+  width: 280px;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  &__title {
+    color: $medium-grey;
+    @include typo("h-s");
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    span {
+      &:nth-of-type(1) {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  &--add-new {
+    border-radius: 6px;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .btn-add-column {
+      @include typo("h-xl");
+      color: $medium-grey;
+      cursor: pointer;
+    }
+  }
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.task {
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.101545);
+  border-radius: 8px;
+  cursor: pointer;
+
+  &__title {
+    @include typo("h-m");
+  }
+
+  &__status-subtasks {
+    @include typo("b-m");
+    color: $medium-grey;
+  }
+}
+
+//Board vide
+
+.board-vide {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+
+  span {
+    &:nth-of-type(1) {
+      @include typo("h-l");
+      color: $medium-grey;
+      text-align: center;
+    }
+    &:nth-of-type(2) {
+      padding: 15px 18px 14px;
+
+      background-color: $main-purple;
+      border-radius: 24px;
+
+      @include typo("h-m");
+      color: $white;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $main-purple-hover;
+      }
+    }
+  }
+}

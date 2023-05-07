@@ -1,0 +1,50 @@
+<!--NEW BOARD MODAL-->
+<div class="new-column-modal" [ngClass]="theme">
+  <form
+    #columnForm="ngForm"
+    (ngSubmit)="onSubmit(columnForm.value)"
+    class="new-column-modal__content white-or-dark-grey-bg"
+  >
+    <div class="title-container">
+      <span class="title black-OR-white-txt">Add New Column</span>
+      <span class="btn-close-modal" (click)="onCloseModal()">&times;</span>
+    </div>
+    <div class="input-group">
+      <label for="name" class="medium-grey-or-white">Name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        [(ngModel)]="columnName"
+        placeholder="e.g. Web Design"
+        required
+        [value]="columnName | titlecase"
+      />
+    </div>
+    <ul class="subtask-group">
+      <label class="medium-grey-or-white">Tasks</label>
+      <li class="subtask-group__item" *ngFor="let task of tasks; let i = index">
+        <input
+          type="text"
+          [value]="task.name | titlecase"
+          class="black-OR-white-txt"
+          name="task{{ i }}"
+          [(ngModel)]="task.name"
+          required
+        />
+        <span class="delete-task " (click)="removeTask(task.id)">&times;</span>
+      </li>
+      <span class="btn-add-task white-or-main-purple-10" (click)="addTask()"
+        >+ Add New Task</span
+      >
+    </ul>
+    <button
+      type="submit"
+      class="btn-create-column"
+      [disabled]="!columnForm.valid"
+      [ngClass]="{ 'disabled-btn': !columnForm.valid }"
+    >
+      Create New Column
+    </button>
+  </form>
+</div>

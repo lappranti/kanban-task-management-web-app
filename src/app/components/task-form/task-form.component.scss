@@ -1,0 +1,178 @@
+@import "../../shared/style/variables";
+
+//NEW BOARD MODAL
+.new-task-modal {
+  @include theme();
+
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #00000050;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__content {
+    width: calc(280px + 8vw);
+    max-height: 90vh;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    padding: 32px;
+    border-radius: 6px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .title-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .title {
+    @include typo("h-l");
+    color: $black;
+  }
+
+  .btn-close-modal {
+    cursor: pointer;
+    font-size: 20px;
+    color: $medium-grey;
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  input {
+    height: 40px;
+
+    @include typo("b-l");
+    color: $black;
+    &::placeholder {
+      @include typo("b-l");
+      color: #00000025;
+    }
+  }
+
+  label {
+    @include typo("h-m");
+    color: $medium-grey;
+  }
+
+  textarea,
+  input,
+  select {
+    width: 100%;
+    padding: 0 16px;
+    border-radius: 4px;
+    border: 1px solid rgba(130, 143, 163, 0.25);
+    outline: none;
+    background-color: transparent;
+
+    &:hover,
+    &:focus {
+      border-color: $main-purple;
+    }
+  }
+
+  textarea {
+    padding: 16px;
+  }
+
+  .subtask-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    &__item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      .delete-subTask {
+        font-size: 1rem;
+        font-weight: 700;
+        color: $medium-grey;
+        cursor: pointer;
+
+        &:hover {
+          color: $red;
+        }
+      }
+    }
+
+    .btn-add-subTask {
+      width: 100%;
+      height: 40px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 20px;
+
+      font-weight: 700;
+      font-size: 13px;
+      line-height: 23px;
+      color: $main-purple;
+      cursor: pointer;
+    }
+  }
+
+  select {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+
+    @include typo("b-l");
+
+    .column {
+      @include typo("b-l");
+      color: $medium-grey;
+      padding: 8px 0;
+    }
+  }
+
+  .btn-create-task {
+    height: 40px !important;
+    width: 100%;
+
+    border-radius: 20px;
+    background-color: $main-purple;
+    border: none;
+    outline: none;
+    color: $white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 23px;
+
+    cursor: pointer;
+
+    &:hover {
+      transition: 0.4s ease-in-out;
+      background-color: $main-purple-hover;
+    }
+
+    &.disabled-btn {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
