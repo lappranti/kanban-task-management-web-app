@@ -65,7 +65,9 @@
         <img
           class="img-desktop"
           [src]="
-            theme == 'dark' ? '/assets/logo-light.svg' : '/assets/logo-dark.svg'
+            theme == 'dark'
+              ? './assets/logo-light.svg'
+              : './assets/logo-dark.svg'
           "
           alt="logo"
         />
