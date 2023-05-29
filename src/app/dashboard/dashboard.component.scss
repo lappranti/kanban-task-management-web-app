@@ -181,10 +181,13 @@
   border-bottom-width: 1px;
   border-bottom-style: solid;
 
+  @media only screen and (max-width: 730px) {
+    height: 54px !important;
+  }
+
   &.hidden {
     padding: 0;
     padding-right: 24px;
-
     gap: 24px;
   }
 
